@@ -444,7 +444,8 @@ function GetCurrentQuest()
                     Level = quest.LevelRequire,
                     MobName = quest.MobName,
                     MonQ = quest.MonQ,
-                    Location = configs.Location
+                    Location = configs.Location,
+                    Mon = quest.Mon  -- Adicionando o Mon aqui
                 }
             end
         end
@@ -457,6 +458,7 @@ function GetCurrentQuest()
     end
     return CurrQuest
 end
+
 
 local function TweenToQuest(questData)
     if not questData or not questData.Position then return end
