@@ -502,7 +502,7 @@ local function TweenToQuest(questData)
 
         GettingQuest = false
         
-        ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", questData.QuestName, questData.QuestIndex)
+        ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", questData.QuestName, questData.Number)
         print("Missao foi iniciada:", questData.QuestName)
         print("Localizacao:", questData.Location)
         print("Alvo:", questData.MobName)
