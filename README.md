@@ -461,7 +461,7 @@ end
 
 local function TweenToQuest(questData)
     if not questData or not questData.Position then return end
-    
+    GettingQuest = true,
     local distance = (humanoidRootPart.Position - questData.Position.Position).Magnitude
     local speed = distance > 350 and 300 or 11000
     local tweenInfo = TweenInfo.new(distance / speed, Enum.EasingStyle.Linear)
@@ -480,6 +480,8 @@ local function TweenToQuest(questData)
                 part.CanCollide = true
             end
         end
+
+        GettingQuest = false
         
         ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", questData.QuestName, 1)
         print("Missão foi iniciada:", questData.QuestName)
