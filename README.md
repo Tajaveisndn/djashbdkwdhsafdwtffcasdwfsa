@@ -451,22 +451,199 @@ local Quests = {
         }
     },
 
+
+
+
+
+
+    --queststsdhsbfewfedsf------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     Area1Quest = {
-        Position = CFrame.new(5259.81982, 37.3500175, 4050.0293, 0.087131381, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, 0.087131381),
+        Position = CFrame.new(-429.543518, 71.7699966, 1836.18188, -0.22495985, 0, -0.974368095, 0, 1, 0, 0.974368095, 0, -0.22495985),
         Location = "Area 1",
         Quests = {
             {
                 Level = 700,
                 MobName = "Raider [Lv. 700]",
                 Number = 1,
-                QuestName = "Area1Quest",
+                QuestName = "Area1Quest", 
                 LevelRequire = 700,
                 Mon = "Raider",
                 MonQ = 8
+            },
+            {
+                Level = 725,
+                MobName = "Mercenary [Lv. 725]",
+                Number = 2,
+                QuestName = "Area1Quest",
+                LevelRequire = 725,
+                Mon = "Mercenary", 
+                MonQ = 8
+            },
+            {
+                Level = 750,
+                MobName = "Diamond [Lv. 750]",
+                Number = 3,
+                QuestName = "Area1Quest",
+                LevelRequire = 750,
+                Mon = "Diamond",
+                MonQ = 1
             }
         }
-    }
-}
+    },
+
+    Area2Quest = {
+        Position = CFrame.new(638.43811, 71.769989, 918.282898, 0.139203906, 0, 0.99026376, 0, 1, 0, -0.99026376, 0, 0.139203906),
+        Location = "Area 2",
+        Quests = {
+            {
+                Level = 775,
+                MobName = "Swan Pirate [Lv. 775]",
+                Number = 1,
+                QuestName = "Area2Quest",
+                LevelRequire = 775,
+                Mon = "Swan Pirate",
+                MonQ = 8
+            },
+            {
+                Level = 800,
+                MobName = "Factory Staff [Lv. 800]",
+                Number = 2,
+                QuestName = "Area2Quest",
+                LevelRequire = 800,
+                Mon = "Factory Staff",
+                MonQ = 8
+            },
+            {
+                Level = 850,
+                MobName = "Jeremy [Lv. 850]",
+                Number = 3,
+                QuestName = "Area2Quest",
+                LevelRequire = 850,
+                Mon = "Jeremy",
+                MonQ = 1
+            }
+        }
+    },
+
+    MarineQuest3 = {
+        Position = CFrame.new(-2440.79639, 71.7140732, -3216.06812, 0.866007268, 0, 0.500031412, 0, 1, 0, -0.500031412, 0, 0.866007268),
+        Location = "Marine Base",
+        Quests = {
+            {
+                Level = 875,
+                MobName = "Marine Lieutenant [Lv. 875]",
+                Number = 1,
+                QuestName = "MarineQuest3",
+                LevelRequire = 875,
+                Mon = "Marine Lieutenant",
+                MonQ = 8
+            },
+            {
+                Level = 900,
+                MobName = "Marine Captain [Lv. 900]",
+                Number = 2,
+                QuestName = "MarineQuest3",
+                LevelRequire = 900,
+                Mon = "Marine Captain",
+                MonQ = 9
+            },
+            {
+                Level = 925,
+                MobName = "Fajita [Lv. 925]",
+                Number = 3,
+                QuestName = "MarineQuest3",
+                LevelRequire = 925,
+                Mon = "Fajita",
+                MonQ = 1
+            }
+        }
+    },
+
+    ZombieQuest = {
+        Position = CFrame.new(-5497.06152, 47.5923004, -795.237061, -0.29242146, 0, -0.95628953, 0, 1, 0, 0.95628953, 0, -0.29242146),
+        Location = "Zombie Area",
+        Quests = {
+            {
+                Level = 950,
+                MobName = "Zombie [Lv. 950]",
+                Number = 1,
+                QuestName = "ZombieQuest",
+                LevelRequire = 950,
+                Mon = "Zombie",
+                MonQ = 8
+            },
+            {
+                Level = 975,
+                MobName = "Vampire [Lv. 975]",
+                Number = 2,
+                QuestName = "ZombieQuest",
+                LevelRequire = 975,
+                Mon = "Vampire",
+                MonQ = 8
+            }
+        }
+    },
+
+    SnowMountainQuest = {
+        Position = CFrame.new(),
+        Location = "Snow Mountain",
+        Quests = {
+            {
+                Level = 1000,
+                MobName = "Snow Trooper [Lv. 1000]",
+                Number = 1,
+                QuestName = "SnowMountainQuest",
+                LevelRequire = 1000,
+                Mon = "Snow Trooper",
+                MonQ = 8
+            },
+            {
+                Level = 1050,
+                MobName = "Winter Warrior [Lv. 1050]",
+                Number = 2,
+                QuestName = "SnowMountainQuest",
+                LevelRequire = 1050,
+                Mon = "Winter Warrior",
+                MonQ = 9
+            }
+        }
+    },
+
+    IceSideQuest = {
+        Position = CFrame.new(),
+        Location = "Ice Side",
+        Quests = {
+            {
+                Level = 1100,
+                MobName = "Lab Subordinate [Lv. 1100]",
+                Number = 1,
+                QuestName = "IceSideQuest",
+                LevelRequire = 1100,
+                Mon = "Lab Subordinate",
+                MonQ = 8
+            },
+            {
+                Level = 1125,
+                MobName = "Horned Warrior [Lv. 1125]",
+                Number = 2,
+                QuestName = "IceSideQuest",
+                LevelRequire = 1125,
+                Mon = "Horned Warrior",
+                MonQ = 9
+            },
+            {
+                Level = 1150,
+                MobName = "Smoke Admiral [Lv. 1150]",
+                Number = 3,
+                QuestName = "IceSideQuest",
+                LevelRequire = 1150,
+                Mon = "Smoke Admiral",
+                MonQ = 1
+            }
+        }
+    },
+
 local PlayerLevel = player.Data.Level.Value
 
 function GetCurrentQuest()
@@ -476,8 +653,6 @@ function GetCurrentQuest()
     
     for npcmain, configs in pairs(Quests) do
         for index, quest in ipairs(configs.Quests) do
-            -- Verifica se o level do player é maior ou igual ao requisito
-            -- E se o nível da quest é o mais alto disponível até agora
             if playerLevel >= quest.LevelRequire and quest.LevelRequire > HighestLevel then
                 HighestLevel = quest.LevelRequire
                 CurrQuest = {
@@ -494,22 +669,11 @@ function GetCurrentQuest()
         end
     end
     
-    -- Só exibe a mensagem uma vez, quando encontrar a quest correta
-    if CurrQuest then
-        print("=========== Quest Info ===========")
-        print("Nível do Jogador:", playerLevel)
-        print("Quest para nível:", CurrQuest.Level)
-        print("Localização:", CurrQuest.Location)
-        print("================================")
-    end
-    
     return CurrQuest
 end
+
 local function TweenToQuest(questData)
-    if not questData or not questData.Position then 
-        print("Quest data inválida")
-        return 
-    end
+    if not questData or not questData.Position then return end
     
     local GettingQuest = true
     local distance = (humanoidRootPart.Position - questData.Position.Position).Magnitude
@@ -534,10 +698,6 @@ local function TweenToQuest(questData)
         GettingQuest = false
         
         ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", questData.QuestName, questData.Number)
-        print("Missao foi iniciada:", questData.QuestName)
-        print("Localizacao:", questData.Location)
-        print("Alvo:", questData.MobName)
-        print("Requerido:", questData.MonQ)
 
         if GetCurrentQuest() then
             bringMobs(humanoidRootPart, GetCurrentQuest().Mon)
@@ -551,15 +711,11 @@ local function StartQuestHunt()
     local questData = GetCurrentQuest()
     if questData then
         TweenToQuest(questData)
-    else
-        print("Nenhuma missao adequada encontrada para o nivel", PlayerLevel)
-        print("Nivel atual do jogador:", PlayerLevel)
     end
 end
 
 player.Data.Level.Changed:Connect(function()
     PlayerLevel = player.Data.Level.Value
-    print("Nivel alterado para:", PlayerLevel)
     StartQuestHunt()
 end)
 
