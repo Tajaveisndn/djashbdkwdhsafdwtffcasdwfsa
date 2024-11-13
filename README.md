@@ -449,13 +449,13 @@ function GetCurrentQuest()
     local HighestLevel = -1
     
     for npcmain, configs in pairs(Quests) do
-        for _, quest in pairs(configs.Quests) do
+        for index, quest in ipairs(configs.Quests) do
             if quest.LevelRequire <= PlayerLevel and quest.LevelRequire > HighestLevel then
                 HighestLevel = quest.LevelRequire
                 CurrQuest = {
                     QuestName = quest.QuestName,
                     Position = configs.Position,
-                    Number = quest.Number,
+                    Number = index,
                     Level = quest.LevelRequire,
                     MobName = quest.MobName,
                     MonQ = quest.MonQ,
