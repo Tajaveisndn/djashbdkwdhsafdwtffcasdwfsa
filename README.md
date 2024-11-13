@@ -644,7 +644,7 @@ local Quests = {
         }
     },
 
-local PlayerLevel = player.Data.Level.Value
+PlayerLevel = player.Data.Level.Value
 
 function GetCurrentQuest()
     local CurrQuest = nil
