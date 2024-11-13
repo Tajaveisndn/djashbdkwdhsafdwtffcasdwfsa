@@ -455,7 +455,7 @@ local function GetCurrentQuest()
         print("Nivel necessario para a missao:", CurrQuest.Level)
         print("Localizacao da missao:", CurrQuest.Location)
     end
-    CurrentMobName = {CurrQuest.Mon}
+    CurrentMobName = CurrQuest.Mon and {CurrQuest.Mon} or {}
     return CurrQuest
 end
 
