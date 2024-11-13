@@ -532,6 +532,10 @@ local function TweenToQuest(questData)
         print("Localizacao:", questData.Location)
         print("Alvo:", questData.MobName)
         print("Requerido:", questData.MonQ)
+        
+        if GetCurrentQuest() then
+            bringMobs(humanoidRootPart, GetCurrentQuest().Mon)
+        end
     end)
     
     tween:Play()
