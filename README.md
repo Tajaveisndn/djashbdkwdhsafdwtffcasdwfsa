@@ -428,7 +428,7 @@ local Quests = {
         }
     }
 }
-local PlayerLevel = player.Data.Level.Value
+PlayerLevel = player.Data.Level.Value
 
 function GetCurrentQuest()
     local CurrQuest = nil
@@ -461,7 +461,7 @@ end
 
 local function TweenToQuest(questData)
     if not questData or not questData.Position then return end
-    GettingQuest = true
+    GettingQuest = true  -- Removida a vírgula aqui
     local distance = (humanoidRootPart.Position - questData.Position.Position).Magnitude
     local speed = distance > 350 and 300 or 11000
     local tweenInfo = TweenInfo.new(distance / speed, Enum.EasingStyle.Linear)
