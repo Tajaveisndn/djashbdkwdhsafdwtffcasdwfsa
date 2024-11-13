@@ -474,10 +474,9 @@ function GetCurrentQuest()
     return CurrQuest
 end
 
-
-function TweenToQuest(questData)
+local function TweenToQuest(questData)
     if not questData or not questData.Position then 
-        print("Nenhuma quest disponível")
+        print("Quest data inválida")
         return 
     end
     
@@ -503,7 +502,7 @@ function TweenToQuest(questData)
 
         GettingQuest = false
         
-        ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", questData.QuestName, questData.Number)
+        ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", questData.QuestName, questData.QuestIndex)
         print("Missao foi iniciada:", questData.QuestName)
         print("Localizacao:", questData.Location)
         print("Alvo:", questData.MobName)
