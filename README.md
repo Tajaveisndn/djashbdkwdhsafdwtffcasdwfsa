@@ -10,6 +10,7 @@ local Quests = {
         Quests = {
             {
                 Level = 0,
+                Number = 1,
                 MobName = "Bandit [Lv. 0]",
                 QuestName = "BanditQuest1",
                 LevelRequire = 0,
@@ -26,6 +27,7 @@ local Quests = {
             {
                 Level = 10,
                 MobName = "Monkey [Lv. 10]",
+                Number = 1,
                 QuestName = "JungleQuest",
                 LevelRequire = 10,
                 Mon = "Monkey",
@@ -35,6 +37,7 @@ local Quests = {
                 Level = 15,
                 MobName = "Gorilla [Lv. 15]",
                 QuestName = "JungleQuest",
+                Number = 2,
                 LevelRequire = 15,
                 Mon = "Gorilla",
                 MonQ = 8
@@ -43,6 +46,7 @@ local Quests = {
                 Level = 20,
                 MobName = "The Gorilla King [Lv. 20]",
                 QuestName = "JungleQuest",
+                Number = 3,
                 LevelRequire = 20,
                 Mon = "The Gorilla King",
                 MonQ = 1
@@ -57,6 +61,7 @@ local Quests = {
             {
                 Level = 30,
                 MobName = "Pirate [Lv. 30]",
+                Numer = 1,
                 QuestName = "BuggyQuest1",
                 LevelRequire = 30,
                 Mon = "Pirate",
@@ -65,6 +70,7 @@ local Quests = {
             {
                 Level = 40,
                 MobName = "Brute [Lv. 40]",
+                Number = 2,
                 QuestName = "BuggyQuest1",
                 LevelRequire = 40,
                 Mon = "Brute",
@@ -74,6 +80,7 @@ local Quests = {
                 Level = 55,
                 MobName = "Bobby [Lv. 55]",
                 QuestName = "BuggyQuest1",
+                Number = 3,
                 LevelRequire = 55,
                 Mon = "Bobby",
                 MonQ = 1
@@ -88,6 +95,7 @@ local Quests = {
             {
                 Level = 60,
                 MobName = "Desert Bandit [Lv. 60]",
+                Number = 1,
                 QuestName = "DesertQuest",
                 LevelRequire = 60,
                 Mon = "Desert Bandit",
@@ -96,6 +104,7 @@ local Quests = {
             {
                 Level = 75,
                 MobName = "Desert Officer [Lv. 75]",
+                Number = 2,
                 QuestName = "DesertQuest",
                 LevelRequire = 75,
                 Mon = "Desert Officer",
@@ -111,6 +120,7 @@ local Quests = {
             {
                 Level = 90,
                 MobName = "Snow Bandit [Lv. 90]",
+                Number = 1,
                 QuestName = "SnowQuest",
                 LevelRequire = 90,
                 Mon = "Snow Bandit",
@@ -119,6 +129,7 @@ local Quests = {
             {
                 Level = 100,
                 MobName = "Snowman [Lv. 100]",
+                Number = 2,
                 QuestName = "SnowQuest",
                 LevelRequire = 100,
                 Mon = "Snowman",
@@ -127,6 +138,7 @@ local Quests = {
             {
                 Level = 105,
                 MobName = "Yeti [Lv. 105]",
+                Number = 3,
                 QuestName = "SnowQuest",
                 LevelRequire = 105,
                 Mon = "Yeti",
@@ -142,6 +154,7 @@ local Quests = {
             {
                 Level = 120,
                 MobName = "Chief Petty Officer [Lv. 120]",
+                Number = 1,
                 QuestName = "MarineQuest2",
                 LevelRequire = 120,
                 Mon = "Chief Petty Officer",
@@ -150,6 +163,7 @@ local Quests = {
             {
                 Level = 130,
                 MobName = "Vice Admiral [Lv. 130]",
+                Number = 2,
                 QuestName = "MarineQuest2",
                 LevelRequire = 130,
                 Mon = "Vice Admiral",
@@ -441,6 +455,7 @@ function GetCurrentQuest()
                 CurrQuest = {
                     QuestName = quest.QuestName,
                     Position = configs.Position,
+                    Number = quest.Number,
                     Level = quest.LevelRequire,
                     MobName = quest.MobName,
                     MonQ = quest.MonQ,
@@ -459,6 +474,10 @@ function GetCurrentQuest()
     return CurrQuest
 end
 
+-- E então use assim:
+if GetCurrentQuest() then
+    selectAnotherChosed(GetCurrentQuest().Mon)
+end
 
 local function TweenToQuest(questData)
     if not questData or not questData.Position then return end
@@ -482,10 +501,10 @@ local function TweenToQuest(questData)
                 part.CanCollide = true
             end
         end
- 
+
         GettingQuest = false
         
-        ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", questData.QuestName, questData.Level)
+        ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", questData.QuestName, questData.Number)
         print("Missao foi iniciada:", questData.QuestName)
         print("Localizacao:", questData.Location)
         print("Alvo:", questData.MobName)
@@ -493,7 +512,7 @@ local function TweenToQuest(questData)
     end)
     
     tween:Play()
- end
+end
 
 local function StartQuestHunt()
     local questData = GetCurrentQuest()
