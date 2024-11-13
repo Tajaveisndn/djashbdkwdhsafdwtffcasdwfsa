@@ -474,10 +474,6 @@ function GetCurrentQuest()
     return CurrQuest
 end
 
--- E então use assim:
-if GetCurrentQuest() then
-    selectAnotherChosed(GetCurrentQuest().Mon)
-end
 
 local function TweenToQuest(questData)
     if not questData or not questData.Position then return end
