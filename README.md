@@ -493,7 +493,7 @@ local function TweenToQuest(questData)
     tween:Play()
 end
 
-local function StartQuestHunt()
+function StartQuestHunt()
     local questData = GetCurrentQuest()
     if questData then
         TweenToQuest(questData)
