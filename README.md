@@ -428,9 +428,9 @@ local Quests = {
         }
     }
 }
-PlayerLevel = player.Data.Level.Value
+local PlayerLevel = player.Data.Level.Value
 
-function GetCurrentQuest()
+local function GetCurrentQuest()
     local CurrQuest = nil
     local HighestLevel = -1
     
@@ -451,9 +451,9 @@ function GetCurrentQuest()
     end
     
     if CurrQuest then
-        print("Missão encontrada para o nível", PlayerLevel)
-        print("Nível necessário para a missão:", CurrQuest.Level)
-        print("Localização da missão:", CurrQuest.Location)
+        print("Missao encontrada para o nivel", PlayerLevel)
+        print("Nivel necessario para a missao:", CurrQuest.Level)
+        print("Localizacao da missao:", CurrQuest.Location)
     end
     
     return CurrQuest
@@ -461,7 +461,8 @@ end
 
 local function TweenToQuest(questData)
     if not questData or not questData.Position then return end
-    GettingQuest = true  -- Removida a vírgula aqui
+    
+    local GettingQuest = true
     local distance = (humanoidRootPart.Position - questData.Position.Position).Magnitude
     local speed = distance > 350 and 300 or 11000
     local tweenInfo = TweenInfo.new(distance / speed, Enum.EasingStyle.Linear)
@@ -484,8 +485,8 @@ local function TweenToQuest(questData)
         GettingQuest = false
         
         ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", questData.QuestName, 1)
-        print("Missão foi iniciada:", questData.QuestName)
-        print("Localização:", questData.Location)
+        print("Missao foi iniciada:", questData.QuestName)
+        print("Localizacao:", questData.Location)
         print("Alvo:", questData.MobName)
         print("Requerido:", questData.MonQ)
     end)
@@ -493,19 +494,19 @@ local function TweenToQuest(questData)
     tween:Play()
 end
 
-function StartQuestHunt()
+local function StartQuestHunt()
     local questData = GetCurrentQuest()
     if questData then
         TweenToQuest(questData)
     else
-        print("Nenhuma missão adequada encontrada para o nível", PlayerLevel)
-        print("Nível atual do jogador:", PlayerLevel)
+        print("Nenhuma missao adequada encontrada para o nivel", PlayerLevel)
+        print("Nivel atual do jogador:", PlayerLevel)
     end
 end
 
 player.Data.Level.Changed:Connect(function()
     PlayerLevel = player.Data.Level.Value
-    print("Nível alterado para:", PlayerLevel)
+    print("Nivel alterado para:", PlayerLevel)
     StartQuestHunt()
 end)
 
