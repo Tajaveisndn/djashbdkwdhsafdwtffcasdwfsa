@@ -103,7 +103,7 @@ local Quests = {
             },
             {
                 Level = 75,
-                MobName = "Desert Officer [Lv. 76]",
+                MobName = "Desert Officer [Lv. 75]",
                 Number = 2,
                 QuestName = "DesertQuest",
                 LevelRequire = 75,
