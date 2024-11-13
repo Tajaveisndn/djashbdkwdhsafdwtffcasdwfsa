@@ -179,6 +179,7 @@ local Quests = {
             {
                 Level = 150,
                 MobName = "Sky Bandit [Lv. 150]",
+                Number = 1,
                 QuestName = "SkyQuest",
                 LevelRequire = 150,
                 Mon = "Sky Bandit",
@@ -187,6 +188,7 @@ local Quests = {
             {
                 Level = 175,
                 MobName = "Dark Master [Lv. 175]",
+                Number = 2,
                 QuestName = "SkyQuest",
                 LevelRequire = 175,
                 Mon = "Dark Master",
@@ -202,6 +204,7 @@ local Quests = {
             {
                 Level = 190,
                 MobName = "Prisoner [Lv. 190]",
+                Number = 1,
                 QuestName = "PrisonerQuest",
                 LevelRequire = 190,
                 Mon = "Prisoner",
@@ -210,6 +213,7 @@ local Quests = {
             {
                 Level = 210,
                 MobName = "Dangerous Prisoner [Lv. 210]",
+                Number = 2,
                 QuestName = "PrisonerQuest",
                 LevelRequire = 210,
                 Mon = "Dangerous Prisoner",
@@ -225,6 +229,7 @@ local Quests = {
             {
                 Level = 220,
                 MobName = "Warden [Lv. 220]",
+                Number = 1,
                 QuestName = "ImpelQuest",
                 LevelRequire = 220,
                 Mon = "Warden",
@@ -233,6 +238,7 @@ local Quests = {
             {
                 Level = 230,
                 MobName = "Chief Warden [Lv. 230]",
+                Number = 2,
                 QuestName = "ImpelQuest",
                 LevelRequire = 230,
                 Mon = "Chief Warden",
@@ -241,6 +247,7 @@ local Quests = {
             {
                 Level = 240,
                 MobName = "Swan [Lv. 240]",
+                Number = 3,
                 QuestName = "ImpelQuest",
                 LevelRequire = 240,
                 Mon = "Swan",
@@ -256,6 +263,7 @@ local Quests = {
             {
                 Level = 250,
                 MobName = "Toga Warrior [Lv. 250]",
+                Number = 1,
                 QuestName = "ColosseumQuest",
                 LevelRequire = 250,
                 Mon = "Toga Warrior",
@@ -264,6 +272,7 @@ local Quests = {
             {
                 Level = 275,
                 MobName = "Gladiator [Lv. 275]",
+                Number = 2,
                 QuestName = "ColosseumQuest",
                 LevelRequire = 275,
                 Mon = "Gladiator",
@@ -279,6 +288,7 @@ local Quests = {
             {
                 Level = 300,
                 MobName = "Military Soldier [Lv. 300]",
+                Number = 1,
                 QuestName = "MagmaQuest",
                 LevelRequire = 300,
                 Mon = "Military Soldier",
@@ -287,6 +297,7 @@ local Quests = {
             {
                 Level = 325,
                 MobName = "Military Spy [Lv. 325]",
+                Number = 2,
                 QuestName = "MagmaQuest",
                 LevelRequire = 325,
                 Mon = "Military Spy",
@@ -295,6 +306,7 @@ local Quests = {
             {
                 Level = 350,
                 MobName = "Magma Admiral [Lv. 350]",
+                Number = 3,
                 QuestName = "MagmaQuest",
                 LevelRequire = 350,
                 Mon = "Magma Admiral",
@@ -310,6 +322,7 @@ local Quests = {
             {
                 Level = 375,
                 MobName = "Fishman Warrior [Lv. 375]",
+                Number = 1,
                 QuestName = "FishmanQuest",
                 LevelRequire = 375,
                 Mon = "Fishman Warrior",
@@ -318,6 +331,7 @@ local Quests = {
             {
                 Level = 400,
                 MobName = "Fishman Commando [Lv. 400]",
+                Number = 2,
                 QuestName = "FishmanQuest",
                 LevelRequire = 400,
                 Mon = "Fishman Commando",
@@ -326,6 +340,7 @@ local Quests = {
             {
                 Level = 425,
                 MobName = "Fishman Lord [Lv. 425]",
+                Number = 3,
                 QuestName = "FishmanQuest",
                 LevelRequire = 425,
                 Mon = "Fishman Lord",
@@ -341,6 +356,7 @@ local Quests = {
             {
                 Level = 450,
                 MobName = "God's Guard [Lv. 450]",
+                Number = 1,
                 QuestName = "SkyExp1Quest",
                 LevelRequire = 450,
                 Mon = "God's Guard",
@@ -349,6 +365,7 @@ local Quests = {
             {
                 Level = 475,
                 MobName = "Shanda [Lv. 475]",
+                Number = 2,
                 QuestName = "SkyExp1Quest",
                 LevelRequire = 475,
                 Mon = "Shanda",
@@ -357,6 +374,7 @@ local Quests = {
             {
                 Level = 500,
                 MobName = "Wysper [Lv. 500]",
+                Number = 3,
                 QuestName = "SkyExp1Quest",
                 LevelRequire = 500,
                 Mon = "Wysper",
@@ -372,6 +390,7 @@ local Quests = {
             {
                 Level = 525,
                 MobName = "Royal Squad [Lv. 525]",
+                Number = 1,
                 QuestName = "SkyExp2Quest",
                 LevelRequire = 525,
                 Mon = "Royal Squad",
@@ -380,6 +399,7 @@ local Quests = {
             {
                 Level = 550,
                 MobName = "Royal Soldier [Lv. 550]",
+                Number = 2,
                 QuestName = "SkyExp2Quest",
                 LevelRequire = 550,
                 Mon = "Royal Soldier",
@@ -388,6 +408,7 @@ local Quests = {
             {
                 Level = 575,
                 MobName = "Thunder God [Lv. 575]",
+                Number = 3,
                 QuestName = "SkyExp2Quest",
                 LevelRequire = 575,
                 Mon = "Thunder God",
@@ -403,6 +424,7 @@ local Quests = {
             {
                 Level = 625,
                 MobName = "Galley Pirate [Lv. 625]",
+                Number = 1,
                 QuestName = "FountainQuest",
                 LevelRequire = 625,
                 Mon = "Galley Pirate",
@@ -411,6 +433,7 @@ local Quests = {
             {
                 Level = 650,
                 MobName = "Galley Captain [Lv. 650]",
+                Number = 2,
                 QuestName = "FountainQuest",
                 LevelRequire = 650,
                 Mon = "Galley Captain",
@@ -419,6 +442,7 @@ local Quests = {
             {
                 Level = 675,
                 MobName = "Cyborg [Lv. 675]",
+                Number = 3,
                 QuestName = "FountainQuest",
                 LevelRequire = 675,
                 Mon = "Cyborg",
@@ -434,6 +458,7 @@ local Quests = {
             {
                 Level = 700,
                 MobName = "Raider [Lv. 700]",
+                Number = 1,
                 QuestName = "Area1Quest",
                 LevelRequire = 700,
                 Mon = "Raider",
