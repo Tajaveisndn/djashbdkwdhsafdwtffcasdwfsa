@@ -475,8 +475,11 @@ function GetCurrentQuest()
 end
 
 
-local function TweenToQuest(questData)
-    if not questData or not questData.Position then return end
+function TweenToQuest(questData)
+    if not questData or not questData.Position then 
+        print("Nenhuma quest disponível")
+        return 
+    end
     
     local GettingQuest = true
     local distance = (humanoidRootPart.Position - questData.Position.Position).Magnitude
