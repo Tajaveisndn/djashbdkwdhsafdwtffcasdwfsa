@@ -482,10 +482,10 @@ local function TweenToQuest(questData)
                 part.CanCollide = true
             end
         end
-
+ 
         GettingQuest = false
         
-        ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", questData.QuestName, 1)
+        ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", questData.QuestName, questData.Level)
         print("Missao foi iniciada:", questData.QuestName)
         print("Localizacao:", questData.Location)
         print("Alvo:", questData.MobName)
@@ -493,7 +493,7 @@ local function TweenToQuest(questData)
     end)
     
     tween:Play()
-end
+ end
 
 local function StartQuestHunt()
     local questData = GetCurrentQuest()
