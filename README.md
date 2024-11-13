@@ -103,7 +103,7 @@ local Quests = {
             },
             {
                 Level = 75,
-                MobName = "Desert Officer [Lv. 75]",
+                MobName = "Desert Officer [Lv. 76]",
                 Number = 2,
                 QuestName = "DesertQuest",
                 LevelRequire = 75,
@@ -472,10 +472,13 @@ local PlayerLevel = player.Data.Level.Value
 function GetCurrentQuest()
     local CurrQuest = nil
     local HighestLevel = -1
+    local playerLevel = player.Data.Level.Value
     
     for npcmain, configs in pairs(Quests) do
         for index, quest in ipairs(configs.Quests) do
-            if quest.LevelRequire <= PlayerLevel and quest.LevelRequire > HighestLevel then
+            -- Verifica se o level do player é maior ou igual ao requisito
+            -- E se o nível da quest é o mais alto disponível até agora
+            if playerLevel >= quest.LevelRequire and quest.LevelRequire > HighestLevel then
                 HighestLevel = quest.LevelRequire
                 CurrQuest = {
                     QuestName = quest.QuestName,
@@ -485,20 +488,23 @@ function GetCurrentQuest()
                     MobName = quest.MobName,
                     MonQ = quest.MonQ,
                     Location = configs.Location,
-                    Mon = quest.Mon  -- Adicionando o Mon aqui
+                    Mon = quest.Mon
                 }
             end
         end
     end
     
+    -- Só exibe a mensagem uma vez, quando encontrar a quest correta
     if CurrQuest then
-        print("Missao encontrada para o nivel", PlayerLevel)
-        print("Nivel necessario para a missao:", CurrQuest.Level)
-        print("Localizacao da missao:", CurrQuest.Location)
+        print("=========== Quest Info ===========")
+        print("Nível do Jogador:", playerLevel)
+        print("Quest para nível:", CurrQuest.Level)
+        print("Localização:", CurrQuest.Location)
+        print("================================")
     end
+    
     return CurrQuest
 end
-
 local function TweenToQuest(questData)
     if not questData or not questData.Position then 
         print("Quest data inválida")
@@ -532,6 +538,10 @@ local function TweenToQuest(questData)
         print("Localizacao:", questData.Location)
         print("Alvo:", questData.MobName)
         print("Requerido:", questData.MonQ)
+
+        if GetCurrentQuest() then
+            bringMobs(humanoidRootPart, GetCurrentQuest().Mon)
+        end
     end)
     
     tween:Play()
