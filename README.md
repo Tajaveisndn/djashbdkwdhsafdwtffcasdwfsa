@@ -26,15 +26,6 @@ local Quests = {
                 LevelRequire = 2150,
                 Mon = "Ice Cream Commander",
                 MonQ = 8
-            },
-            {
-                Level = 2175,
-                Number = 3,
-                MobName = "Cake Queen [Lv. 2175]",
-                QuestName = "IceCreamIslandQuest",
-                LevelRequire = 2175,
-                Mon = "Cake Queen",
-                MonQ = 1
             }
         }
     },
