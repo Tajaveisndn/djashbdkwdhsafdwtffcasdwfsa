@@ -215,11 +215,20 @@ local Quests = {
     }
 }
 
--- Adiciona verificação de personagem quando ele for recarregado
 player.CharacterAdded:Connect(function(char)
     character = char
     humanoidRootPart = char:WaitForChild("HumanoidRootPart")
 end)
+
+function CheckBossModel()
+    local bossModel = ReplicatedStorage:FindFirstChild("Cake Queen")
+    if bossModel and bossModel:FindFirstChild("HumanoidRootPart") then
+        local bossPosition = bossModel.HumanoidRootPart.Position
+        TweenToPosition(CFrame.new(bossPosition))
+        return true
+    end
+    return false
+end
 
 function IsBossSpawned(bossName)
     local workspace = game:GetService("Workspace")
@@ -237,6 +246,9 @@ function IsBossSpawned(bossName)
 end
 
 function GetCurrentQuest()
+    -- Check for boss in ReplicatedStorage first
+    if CheckBossModel() then return nil end
+    
     local CurrQuest = nil
     local HighestLevel = -1
     local playerLevel = player.Data.Level.Value
@@ -244,7 +256,7 @@ function GetCurrentQuest()
     pcall(function()
         for npcmain, configs in pairs(Quests) do
             for index, quest in ipairs(configs.Quests) do
-                -- Skip Cake Queen quest if boss isn't spawned
+                -- Skip Cake Queen quest if not spawned
                 if quest.Mon == "Cake Queen" and not IsBossSpawned("Cake Queen [Lv. 2175]") then
                     continue
                 end
@@ -269,19 +281,13 @@ function GetCurrentQuest()
     return CurrQuest
 end
 
-
-local function TweenToQuest(questData)
-    if not questData or not questData.Position then return end
+function TweenToPosition(targetCFrame)
     if not character or not humanoidRootPart then return end
     
-    local GettingQuest = true
-    
-    -- Adiciona verificação de distância máxima para evitar tweens muito longos
-    local distance = math.min((humanoidRootPart.Position - questData.Position.Position).Magnitude, 10000)
+    local distance = (humanoidRootPart.Position - targetCFrame.Position).Magnitude
     local speed = distance > 350 and 300 or 11000
     local tweenInfo = TweenInfo.new(distance / speed, Enum.EasingStyle.Linear)
     
-    -- Desativa colisões
     pcall(function()
         for _, part in pairs(character:GetDescendants()) do
             if part:IsA("BasePart") or part:IsA("MeshPart") then
@@ -296,10 +302,9 @@ local function TweenToQuest(questData)
     bodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
     bodyVelocity.Velocity = Vector3.new(0, 0, 0)
     
-    local tween = TweenService:Create(humanoidRootPart, tweenInfo, {CFrame = questData.Position})
+    local tween = TweenService:Create(humanoidRootPart, tweenInfo, {CFrame = targetCFrame})
     
     tween.Completed:Connect(function()
-        -- Reativa colisões
         pcall(function()
             for _, part in pairs(character:GetDescendants()) do
                 if part:IsA("BasePart") or part:IsA("MeshPart") then
@@ -312,17 +317,14 @@ local function TweenToQuest(questData)
             bodyVelocity:Destroy()
         end
         
-        GettingQuest = false
-        
-        -- Tenta pegar a quest
-        pcall(function()
-            ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", questData.QuestName, questData.Number)
-        end)
-        
-        -- Verifica se ainda tem quest atual antes de chamar bringMobs
-        local currentQuest = GetCurrentQuest()
-        if currentQuest and currentQuest.Mon then
-            bringMobs(humanoidRootPart, currentQuest.Mon)
+        if not CheckBossModel() then
+            local currentQuest = GetCurrentQuest()
+            if currentQuest then
+                ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", currentQuest.QuestName, currentQuest.Number)
+                if currentQuest.Mon then
+                    bringMobs(humanoidRootPart, currentQuest.Mon)
+                end
+            end
         end
     end)
     
@@ -332,11 +334,10 @@ end
 local function StartQuestHunt()
     local questData = GetCurrentQuest()
     if questData then
-        TweenToQuest(questData)
+        TweenToPosition(questData.Position)
     end
 end
 
--- Conexão com mudança de nível
 local function onLevelChanged()
     pcall(function()
         PlayerLevel = player.Data.Level.Value
@@ -346,5 +347,12 @@ end
 
 player.Data.Level.Changed:Connect(onLevelChanged)
 
--- Inicia o auto farm
+-- Check for boss spawn periodically
+spawn(function()
+    while wait(1) do
+        CheckBossModel()
+    end
+end)
+
+-- Start auto farm
 StartQuestHunt()
