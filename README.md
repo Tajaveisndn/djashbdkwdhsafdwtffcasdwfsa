@@ -221,14 +221,34 @@ player.CharacterAdded:Connect(function(char)
     humanoidRootPart = char:WaitForChild("HumanoidRootPart")
 end)
 
+function IsBossSpawned(bossName)
+    local workspace = game:GetService("Workspace")
+    local enemies = workspace:FindFirstChild("Enemies")
+    
+    if enemies then
+        for _, enemy in pairs(enemies:GetChildren()) do
+            if enemy.Name == bossName and enemy:FindFirstChild("Humanoid") 
+            and enemy.Humanoid.Health > 0 then
+                return true
+            end
+        end
+    end
+    return false
+end
+
 function GetCurrentQuest()
     local CurrQuest = nil
     local HighestLevel = -1
     local playerLevel = player.Data.Level.Value
     
-    pcall(function() -- Adiciona pcall para evitar erros
+    pcall(function()
         for npcmain, configs in pairs(Quests) do
             for index, quest in ipairs(configs.Quests) do
+                -- Skip Cake Queen quest if boss isn't spawned
+                if quest.Mon == "Cake Queen" and not IsBossSpawned("Cake Queen [Lv. 2175]") then
+                    continue
+                end
+                
                 if playerLevel >= quest.LevelRequire and quest.LevelRequire > HighestLevel then
                     HighestLevel = quest.LevelRequire
                     CurrQuest = {
@@ -248,6 +268,7 @@ function GetCurrentQuest()
     
     return CurrQuest
 end
+
 
 local function TweenToQuest(questData)
     if not questData or not questData.Position then return end
