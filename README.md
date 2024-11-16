@@ -1,4 +1,3 @@
-
 local TweenService = game:GetService("TweenService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local player = game.Players.LocalPlayer
@@ -124,7 +123,7 @@ local Quests = {
                 MobName = "Candy Rebel [Lv. 2375]",
                 QuestName = "ChocQuest2",
                 LevelRequire = 2375,
-        Mon = "Candy Rebel",
+                Mon = "Candy Rebel",
                 MonQ = 8
             }
         }
@@ -149,7 +148,7 @@ local Quests = {
                 MobName = "Snow Demon [Lv. 2425]",
                 QuestName = "CandyQuest1",
                 LevelRequire = 2425,
-        Mon = "Snow Demon",
+                Mon = "Snow Demon",
                 MonQ = 8
             }
         }
