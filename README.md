@@ -277,10 +277,12 @@ function TweenToPosition(targetCFrame)
         
         local currentQuest = GetCurrentQuest()
         if currentQuest and currentQuest.QuestName and currentQuest.Number then
-            ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", currentQuest.QuestName, currentQuest.Number)
-            if currentQuest.Mon then
-                bringMobs(humanoidRootPart, currentQuest.Mon)
-            end
+            pcall(function()
+                ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", currentQuest.QuestName, currentQuest.Number)
+                if currentQuest.Mon then
+                    bringMobs(humanoidRootPart, currentQuest.Mon)
+                end
+            end)
         end
     end)
     
