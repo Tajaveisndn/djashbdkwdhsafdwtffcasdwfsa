@@ -1,5 +1,6 @@
+tem que fz um filtro que ele vai selecionar os npcs que tiver com nome na tabela:
 
-local TweenService = game:GetService("TweenService")
+Cod table: local TweenService = game:GetService("TweenService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
@@ -205,85 +206,64 @@ local Quests = {
         }
     }
 }
+local PlayerLevel = player.Data.Level.Value
 
-player.CharacterAdded:Connect(function(char)
-    character = char
-    humanoidRootPart = char:WaitForChild("HumanoidRootPart")
-end)
-
-function GetCurrentQuest()
+local function GetCurrentQuest()
     local CurrQuest = nil
     local HighestLevel = -1
-    local playerLevel = player.Data.Level.Value
     
-    pcall(function()
-        for npcmain, configs in pairs(Quests) do
-            for index, quest in ipairs(configs.Quests) do                
-                if playerLevel >= quest.LevelRequire and quest.LevelRequire > HighestLevel then
-                    HighestLevel = quest.LevelRequire
-                    CurrQuest = {
-                        QuestName = quest.QuestName,
-                        Position = configs.Position,
-                        Number = index,
-                        Level = quest.LevelRequire,
-                        MobName = quest.MobName,
-                        MonQ = quest.MonQ,
-                        Location = configs.Location,
-                        Mon = quest.Mon
-                    }
-                end
+    for npcmain, configs in pairs(Quests) do
+        for _, quest in pairs(configs.Quests) do
+            if quest.LevelRequire <= PlayerLevel and quest.LevelRequire > HighestLevel then
+                HighestLevel = quest.LevelRequire
+                CurrQuest = {
+                    QuestName = quest.QuestName,
+                    Position = configs.Position,
+                    Level = quest.LevelRequire,
+                    MobName = quest.MobName,
+                    MonQ = quest.MonQ,
+                    Location = configs.Location
+                }
             end
         end
-    end)
+    end
+    
+    if CurrQuest then
+        print("Missão encontrada para o nível", PlayerLevel)
+        print("Nível necessário para a missão:", CurrQuest.Level)
+        print("Localização da missão:", CurrQuest.Location)
+    end
     
     return CurrQuest
 end
 
-function TweenToPosition(targetCFrame)
-    if not character or not humanoidRootPart then return end
+local function TweenToQuest(questData)
+    if not questData or not questData.Position then return end
     
-    local distance = (humanoidRootPart.Position - targetCFrame.Position).Magnitude
+    local distance = (humanoidRootPart.Position - questData.Position.Position).Magnitude
     local speed = distance > 350 and 300 or 11000
     local tweenInfo = TweenInfo.new(distance / speed, Enum.EasingStyle.Linear)
     
-    pcall(function()
-        for _, part in pairs(character:GetDescendants()) do
-            if part:IsA("BasePart") or part:IsA("MeshPart") then
-                part.CanCollide = false
-            end
+    for _, part in pairs(character:GetDescendants()) do
+        if part:IsA("BasePart") or part:IsA("MeshPart") then
+            part.CanCollide = false
         end
-    end)
+    end
     
-    local bodyVelocity = Instance.new("BodyVelocity")
-    bodyVelocity.Name = "QuestTweenVelocity"
-    bodyVelocity.Parent = humanoidRootPart
-    bodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-    bodyVelocity.Velocity = Vector3.new(0, 0, 0)
-    
-    local tween = TweenService:Create(humanoidRootPart, tweenInfo, {CFrame = targetCFrame})
+    local tween = TweenService:Create(humanoidRootPart, tweenInfo, {CFrame = questData.Position})
     
     tween.Completed:Connect(function()
-        pcall(function()
-            for _, part in pairs(character:GetDescendants()) do
-                if part:IsA("BasePart") or part:IsA("MeshPart") then
-                    part.CanCollide = true
-                end
+        for _, part in pairs(character:GetDescendants()) do
+            if part:IsA("BasePart") or part:IsA("MeshPart") then
+                part.CanCollide = true
             end
-        end)
-        
-        if bodyVelocity and bodyVelocity.Parent then
-            bodyVelocity:Destroy()
         end
         
-        local currentQuest = GetCurrentQuest()
-        if currentQuest and currentQuest.QuestName and currentQuest.Number then
-            pcall(function()
-                ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", currentQuest.QuestName, currentQuest.Number)
-                if currentQuest.Mon then
-                    bringMobs(humanoidRootPart, currentQuest.Mon)
-                end
-            end)
-        end
+        ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", questData.QuestName, 1)
+        print("Missão foi iniciada:", questData.QuestName)
+        print("Localização:", questData.Location)
+        print("Alvo:", questData.MobName)
+        print("Requerido:", questData.MonQ)
     end)
     
     tween:Play()
@@ -292,18 +272,17 @@ end
 local function StartQuestHunt()
     local questData = GetCurrentQuest()
     if questData then
-        TweenToPosition(questData.Position)
+        TweenToQuest(questData)
+    else
+        print("Nenhuma missão adequada encontrada para o nível", PlayerLevel)
+        print("Nível atual do jogador:", PlayerLevel)
     end
 end
 
-local function onLevelChanged()
-    pcall(function()
-        PlayerLevel = player.Data.Level.Value
-        StartQuestHunt()
-    end)
-end
+player.Data.Level.Changed:Connect(function()
+    PlayerLevel = player.Data.Level.Value
+    print("Nível alterado para:", PlayerLevel)
+    StartQuestHunt()
+end)
 
-player.Data.Level.Changed:Connect(onLevelChanged)
-
--- Start auto farm
 StartQuestHunt()
