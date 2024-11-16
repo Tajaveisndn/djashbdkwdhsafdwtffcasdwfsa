@@ -211,47 +211,14 @@ player.CharacterAdded:Connect(function(char)
     humanoidRootPart = char:WaitForChild("HumanoidRootPart")
 end)
 
-function CheckBossModel()
-    local bossModel = ReplicatedStorage:FindFirstChild("Cake Queen")
-    if bossModel and bossModel:FindFirstChild("HumanoidRootPart") then
-        local bossPosition = bossModel.HumanoidRootPart.Position
-        TweenToPosition(CFrame.new(bossPosition))
-        return true
-    end
-    return false
-end
-
-function IsBossSpawned(bossName)
-    local workspace = game:GetService("Workspace")
-    local enemies = workspace:FindFirstChild("Enemies")
-    
-    if enemies then
-        for _, enemy in pairs(enemies:GetChildren()) do
-            if enemy.Name == bossName and enemy:FindFirstChild("Humanoid") 
-            and enemy.Humanoid.Health > 0 then
-                return true
-            end
-        end
-    end
-    return false
-end
-
 function GetCurrentQuest()
-    -- Check for boss in ReplicatedStorage first
-    if CheckBossModel() then return nil end
-    
     local CurrQuest = nil
     local HighestLevel = -1
     local playerLevel = player.Data.Level.Value
     
     pcall(function()
         for npcmain, configs in pairs(Quests) do
-            for index, quest in ipairs(configs.Quests) do
-                -- Skip Cake Queen quest if not spawned
-                if quest.Mon == "Cake Queen" and not IsBossSpawned("Cake Queen [Lv. 2175]") then
-                    continue
-                end
-                
+            for index, quest in ipairs(configs.Quests) do                
                 if playerLevel >= quest.LevelRequire and quest.LevelRequire > HighestLevel then
                     HighestLevel = quest.LevelRequire
                     CurrQuest = {
@@ -308,13 +275,11 @@ function TweenToPosition(targetCFrame)
             bodyVelocity:Destroy()
         end
         
-        if not CheckBossModel() then
-            local currentQuest = GetCurrentQuest()
-            if currentQuest then
-                ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", currentQuest.QuestName, currentQuest.Number)
-                if currentQuest.Mon then
-                    bringMobs(humanoidRootPart, currentQuest.Mon)
-                end
+        local currentQuest = GetCurrentQuest()
+        if currentQuest then
+            ReplicatedStorage.Remotes.CommF_:InvokeServer("StartQuest", currentQuest.QuestName, currentQuest.Number)
+            if currentQuest.Mon then
+                bringMobs(humanoidRootPart, currentQuest.Mon)
             end
         end
     end)
@@ -337,13 +302,6 @@ local function onLevelChanged()
 end
 
 player.Data.Level.Changed:Connect(onLevelChanged)
-
--- Check for boss spawn periodically
-spawn(function()
-    while wait(1) do
-        CheckBossModel()
-    end
-end)
 
 -- Start auto farm
 StartQuestHunt()
